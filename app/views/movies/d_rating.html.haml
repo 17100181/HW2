@@ -1,6 +1,6 @@
 %h1 Delete Movie By Rating
 
-= form_tag updatefunc_path do
+= form_tag delete_rating_path do
 
   = label :movie, :rating, 'Rating'
   = select :movie, :rating, ['G','PG','PG-13','R','NC-17']

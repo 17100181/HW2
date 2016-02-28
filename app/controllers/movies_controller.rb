@@ -74,5 +74,34 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
+  
+  def delete_title
+    title = params[:movie][:title]
+    @movie = Movie.find_by_title(title)
+    if @movie
+      @movie.destroy
+      flash[:notice] = "Movie '#{title}' Deleted."
+      redirect_to movies_path
+    else
+      flash[:notice] = "Error! Movie Not Found"
+      redirect_to movies_path
+    end
+  end
+  
+  def delete_rating
+    rating = params[:movie][:rating]
+    @movie = Movie.find_by_rating(rating)
+    if @movie
+      while @movie
+        @movie.destroy
+        @movie = Movie.find_by_rating(rating)
+      end
+      flash[:notice] = "Movies with Rating: '#{rating}' Deleted."
+      redirect_to movies_path
+    else
+      flash[:notice] = "Error! No Movies with rating: '#{rating}'"
+      redirect_to movies_path
+    end
+  end
 
 end
