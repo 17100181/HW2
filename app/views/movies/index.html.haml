@@ -2,7 +2,6 @@
 %h1 All Movies 
 
 
-
 %table#movies
   %thead
     %tr
@@ -22,7 +21,7 @@
   Include: 
   - @all_ratings.each do |rating|
     = rating
-    = check_box_tag "ratings[#{rating}]", rating, if params[:ratings]; params[:ratings].include?(rating) end
+    = check_box_tag "ratings[#{rating}]", rating, if params[:ratings]; params[:ratings].include?(rating); else true end
   = submit_tag 'Refresh', :id=> "ratings_submit"
   
   

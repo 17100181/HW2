@@ -14,10 +14,11 @@ class MoviesController < ApplicationController
     @all_ratings = ['G', 'PG', 'PG-13', 'R', 'NC-17']
     rating = params[:ratings]
     if rating == nil
-      @movies = Movie.order(params[:hashish])
+      @movies = Movie.order(params[:hashish]) || session[:hashish]
     else
       @movies = Movie.where(rating: params[:ratings].keys)
     end
+    
   end
 
   def new

@@ -1,5 +1,6 @@
 class Movie < ActiveRecord::Base
-    # def self.getRatings
+    # def self.all_ratings
+        
         
     # end
 end
