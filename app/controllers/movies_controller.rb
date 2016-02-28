@@ -25,14 +25,47 @@ class MoviesController < ApplicationController
   end
 
   def edit
-    @movie = Movie.find params[:id]
+    # @movie = Movie.create!(movie_params)
+    # @movie = Movie.find params[:id]
+    # redirect_to movies_path
+  end
+
+  def updater
+    
+    id = params[:old][:title] # retrieve movie ID from URI route
+    
+    @movie = Movie.find_by_title(id)
+    ntit = params[:movie][:newtitle]
+    rel = params[:movie][:release_date]
+    rat = params[:movie][:rating]
+    
+    if @movie
+      if params[:movie][:newtitle].empty?
+        hash = {title: id,rating: rat,release_date: rel}
+        @movie.update_attributes!(hash)
+        @movie.update_attributes!(movie_params)
+        flash[:notice] = "'#{id}' Sucessfully Updated"
+      
+      else
+        hash = {title: ntit,rating: rat,release_date: rel}
+        @movie.update_attributes!(hash)
+        @movie.update_attributes!(movie_params)
+        flash[:notice] = "'#{id}' Sucessfully Updated"
+      end
+      
+      
+    else
+      flash[:notice] = "Error! Movie Not Found"
+    end
+    
+    redirect_to movies_path(@movie)
   end
 
   def update
     @movie = Movie.find params[:id]
     @movie.update_attributes!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully updated."
-    redirect_to movie_path(@movie)
+    redirect_to movies_path(@movie)
   end
 
   def destroy

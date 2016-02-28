@@ -1,5 +1,5 @@
 -#  This file is app/views/movies/index.html.haml
-%h1 All Movies
+%h1 All Movies 
 
 %table#movies
   %thead
@@ -16,4 +16,8 @@
         %td= movie.release_date
         %td= link_to "More about #{movie.title}", movie_path(movie)
 
-= link_to 'Add new movie', new_movie_path
+= link_to 'Add New Movie', new_movie_path(@movies)
+
+= link_to 'Update Movie', edit_movie_path(@movies)
+
+// = link_to 'Delete Movie(s)', updater_path(@movies)
