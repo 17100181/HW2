@@ -14,3 +14,29 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+var $container	= $('#ib-container'),
+	$movies	= $container.children('movie'),
+	timeout;
+
+$movies.on( 'mouseenter', function( event ) {
+		
+	var $movie	= $(this);
+	clearTimeout( timeout );
+	timeout = setTimeout( function() {
+		
+		if( $movie.hasClass('active') ) return false;
+		
+		$movies.not($movie).removeClass('active').addClass('blur');
+		
+		$movie.removeClass('blur').addClass('active');
+		
+	}, 75 );
+	
+});
+
+$container.on( 'mouseleave', function( event ) {
+	
+	clearTimeout( timeout );
+	$movies.removeClass('active blur');
+	
+});

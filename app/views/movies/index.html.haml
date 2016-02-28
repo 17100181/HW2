@@ -21,8 +21,8 @@
   Include: 
   - @all_ratings.each do |rating|
     = rating
-    = check_box_tag "ratings[#{rating}]", rating, if params[:ratings]; params[:ratings].include?(rating); else true end
-  = submit_tag 'Refresh', :id=> "ratings_submit"
+    = check_box_tag "ratings[#{rating}]", rating, if params[:ratings]; params[:ratings].include?(rating); else true end, class: 'box'
+  = submit_tag 'Refresh', :id=> "ratings_submit", class: 'button'
   
   
 <br />
